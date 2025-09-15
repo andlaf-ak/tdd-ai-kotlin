@@ -8,27 +8,27 @@ all: check
 # Build the project
 build:
 	@echo "Building project..."
-	gradle build
+	./gradlew build
 
 # Run tests
 test:
 	@echo "Running tests..."
-	gradle test
+	./gradlew test
 
 # Lint the code (using ktlint)
 lint:
 	@echo "Running linter..."
-	gradle ktlintCheck
+	./gradlew ktlintCheck
 
 # Format the code
 format:
 	@echo "Formatting code..."
-	gradle ktlintFormat
+	./gradlew ktlintFormat
 
 # Security scan (using detekt)
 scan:
 	@echo "Running security scan..."
-	gradle detekt
+	./gradlew detekt
 
 # Run all checks (test + lint + scan)
 check: test lint scan
@@ -37,11 +37,13 @@ check: test lint scan
 # Clean build artifacts
 clean:
 	@echo "Cleaning build artifacts..."
-	gradle clean
+	./gradlew clean
 
 # Setup development environment
 dev-setup:
 	@echo "Setting up development environment..."
+	@echo "Generating Gradle wrapper..."
+	gradle wrapper --gradle-version=8.10.2 --distribution-type=bin
 	@echo "Installing git hooks..."
 	./scripts/install-hooks.sh
 	@echo "Running initial build and checks..."
